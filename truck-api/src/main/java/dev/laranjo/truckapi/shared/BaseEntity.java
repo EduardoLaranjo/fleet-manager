@@ -15,6 +15,14 @@ public class BaseEntity {
     @CreationTimestamp
     private LocalDateTime creationDate;
 
+    public BaseEntity() {
+    }
+
+    protected BaseEntity(long id, LocalDateTime creationDate) {
+        this.id = id;
+        this.creationDate = creationDate;
+    }
+
     public Long getId() {
         return id;
     }

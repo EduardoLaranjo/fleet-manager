@@ -1,25 +1,25 @@
 package dev.laranjo.truckapi.truck;
 
+import dev.laranjo.truckapi.shared.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 final class TruckService {
 
+    private final TruckRepository truckRepository;
 
-
-    List<Truck> getTrucks() {
-        final var truck = new Truck();
-        truck.setId(0L);
-        truck.setManufacturer("MAN");
-        truck.setCreationDate(LocalDateTime.of(2020, 7, 21, 18, 20));
-        truck.setLicensePlate("98-MR-21");
-        truck.setMonth(7);
-        truck.setYear(2020);
-        truck.setPath(List.of(GeoRecord.at(1.00, 1.00)));
-        return List.of(truck);
+    public TruckService(TruckRepository truckRepository) {
+        this.truckRepository = truckRepository;
     }
 
+    List<Truck> getAllTrucks() {
+        return this.truckRepository.findAll();
+    }
+
+    public Truck getTruck(long id) {
+        return this.truckRepository.findById()
+                .orElseThrow(() -> new NotFoundException("truck with id " + id + " not found"));
+    }
 }

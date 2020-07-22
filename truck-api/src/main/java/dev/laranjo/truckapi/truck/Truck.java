@@ -4,6 +4,7 @@ import dev.laranjo.truckapi.shared.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,18 @@ final class Truck extends BaseEntity {
 
     @OneToMany
     private List<GeoRecord> path;
+
+    public Truck() {
+    }
+
+    private Truck(long id, LocalDateTime creationDate, String manufacturer, String licensePlate, int year, int month, List<GeoRecord> path) {
+        super(id, creationDate);
+        this.manufacturer = manufacturer;
+        this.licensePlate = licensePlate;
+        this.year = year;
+        this.month = month;
+        this.path = path;
+    }
 
     public String getManufacturer() {
         return manufacturer;
@@ -76,10 +89,55 @@ final class Truck extends BaseEntity {
         return Objects.hash(super.hashCode(), getManufacturer(), getLicensePlate(), getYear(), getMonth(), getPath());
     }
 
-    public static class Builder {
+    static class Builder {
+
+        private long id;
+        private LocalDateTime creationDate;
+        private String manufacturer;
+        private String licensePlate;
+        private int year;
+        private int month;
+        private List<GeoRecord> path;
 
         public Truck build() {
-            return null;
+            return new Truck(id, creationDate, manufacturer, licensePlate, year, month, path);
         }
+
+        public Builder id(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder creationDate(LocalDateTime creationDate) {
+            this.creationDate = creationDate;
+            return this;
+        }
+
+        public Builder manufacturer(String manufacturer) {
+            this.manufacturer = manufacturer;
+            return this;
+        }
+
+        public Builder licensePlate(String licensePlate) {
+            this.licensePlate = licensePlate;
+            return this;
+        }
+
+        public Builder year(int year) {
+            this.year = year;
+            return this;
+        }
+
+        public Builder month(int month) {
+            this.month = month;
+            return this;
+        }
+
+        public Builder path(List<GeoRecord> path) {
+            this.path = path;
+            return this;
+
+        }
+
     }
 }

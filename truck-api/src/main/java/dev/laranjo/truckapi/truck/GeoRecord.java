@@ -5,7 +5,7 @@ import dev.laranjo.truckapi.shared.BaseEntity;
 import javax.persistence.Entity;
 
 @Entity
-class GeoRecord extends BaseEntity {
+final class GeoRecord extends BaseEntity {
 
     private double lat;
     private double log;
