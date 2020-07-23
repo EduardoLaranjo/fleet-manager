@@ -2,8 +2,7 @@ package dev.laranjo.truckapi.truck;
 
 import dev.laranjo.truckapi.shared.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -12,11 +11,14 @@ import java.util.Objects;
 final class Truck extends BaseEntity {
 
     private String manufacturer;
+
+    @Column(unique = true)
     private String licensePlate;
+
     private int year;
     private int month;
 
-    @OneToMany
+    @OneToMany(mappedBy = "truck")
     private List<GeoRecord> path;
 
     public Truck() {
@@ -100,7 +102,8 @@ final class Truck extends BaseEntity {
         private List<GeoRecord> path;
 
         public Truck build() {
-            return new Truck(id, creationDate, manufacturer, licensePlate, year, month, path);
+            final var truck = new Truck(id, creationDate, manufacturer, licensePlate, year, month, path);
+            return truck;
         }
 
         public Builder id(long id) {
@@ -136,7 +139,6 @@ final class Truck extends BaseEntity {
         public Builder path(List<GeoRecord> path) {
             this.path = path;
             return this;
-
         }
 
     }

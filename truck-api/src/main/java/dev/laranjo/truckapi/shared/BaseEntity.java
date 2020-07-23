@@ -2,14 +2,17 @@ package dev.laranjo.truckapi.shared;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@Entity
+@MappedSuperclass
 public class BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @CreationTimestamp
