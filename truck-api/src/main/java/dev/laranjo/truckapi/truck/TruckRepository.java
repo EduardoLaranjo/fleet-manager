@@ -8,7 +8,4 @@ import java.util.Optional;
 
 @Repository
 interface TruckRepository extends JpaRepository<Truck, Long> {
-    List<Truck> findAll();
-
-    Optional<Truck> findById();
 }

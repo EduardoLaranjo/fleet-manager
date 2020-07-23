@@ -19,7 +19,7 @@ final class TruckService {
     }
 
     public Truck getTruck(long id) {
-        return this.truckRepository.findById()
+        return this.truckRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("truck with id " + id + " not found"));
     }
 }

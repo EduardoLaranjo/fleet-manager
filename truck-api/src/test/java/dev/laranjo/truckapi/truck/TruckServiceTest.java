@@ -67,7 +67,7 @@ class TruckServiceTest {
                 .path(List.of(GeoRecord.at(1.00, 1.00)))
                 .build();
 
-        Mockito.when(truckRepository.findById()).thenReturn(Optional.of(want));
+        Mockito.when(truckRepository.findById(Mockito.eq(0L))).thenReturn(Optional.of(want));
         final var truckService = new TruckService(truckRepository);
 
         //when
@@ -89,7 +89,7 @@ class TruckServiceTest {
     void when_get_truck_by_id_then_not_found() {
         // given
         final var truckRepository = Mockito.mock(TruckRepository.class);
-        Mockito.when(truckRepository.findById()).thenReturn(Optional.empty());
+        Mockito.when(truckRepository.findById(Mockito.any())).thenReturn(Optional.empty());
         final var truckService = new TruckService(truckRepository);
 
         //when //then
