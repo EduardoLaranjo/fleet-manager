@@ -8,4 +8,5 @@ import java.util.Optional;
 
 @Repository
 interface TruckRepository extends JpaRepository<Truck, Long> {
+    Optional<Truck> findByLicensePlate(String licensePlate);
 }

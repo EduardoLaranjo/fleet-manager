@@ -10,11 +10,10 @@ import java.util.Objects;
 @Entity
 final class Truck extends BaseEntity {
 
-    private String manufacturer;
 
     @Column(unique = true)
     private String licensePlate;
-
+    private String manufacturer;
     private int year;
     private int month;
 
@@ -22,6 +21,14 @@ final class Truck extends BaseEntity {
     private List<GeoRecord> path;
 
     public Truck() {
+    }
+
+    public Truck(String licensePlate, String manufacturer, int year, int month, List<GeoRecord> path) {
+        this.licensePlate = licensePlate;
+        this.manufacturer = manufacturer;
+        this.year = year;
+        this.month = month;
+        this.path = path;
     }
 
     private Truck(long id, LocalDateTime creationDate, String manufacturer, String licensePlate, int year, int month, List<GeoRecord> path) {
