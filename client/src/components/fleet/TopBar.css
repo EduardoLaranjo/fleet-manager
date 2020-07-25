@@ -1,0 +1,29 @@
+
+.container-top-bar {
+    background-color: white;
+    display: flex;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    z-index: 10;
+
+    font-size: 22px;
+
+    width: 22vw;
+    height: 3vh;
+
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+
+    border: black solid thin;
+    padding: 5px;
+}
+
+
+.container-top-bar select {
+    border: black solid thin;
+}
