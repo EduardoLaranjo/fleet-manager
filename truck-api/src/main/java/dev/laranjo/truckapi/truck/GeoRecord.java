@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 final class GeoRecord extends BaseEntity {
 
     private double lat;
-    private double log;
+    private double lng;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Truck truck;
@@ -18,9 +18,9 @@ final class GeoRecord extends BaseEntity {
     public GeoRecord() {
     }
 
-    public GeoRecord(double lat, double log) {
+    public GeoRecord(double lat, double lng) {
         this.lat = lat;
-        this.log = log;
+        this.lng = lng;
     }
 
     public static GeoRecord at(double lat, double log) {
@@ -35,12 +35,12 @@ final class GeoRecord extends BaseEntity {
         this.lat = lat;
     }
 
-    public double getLog() {
-        return log;
+    public double getLng() {
+        return lng;
     }
 
-    public void setLog(double log) {
-        this.log = log;
+    public void setLng(double log) {
+        this.lng = log;
     }
 
     public Truck getTruck() {

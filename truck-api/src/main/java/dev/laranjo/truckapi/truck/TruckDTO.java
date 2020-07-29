@@ -34,19 +34,19 @@ class TruckDTO {
 
     public static class Coordinate {
         private final double lat;
-        private final double log;
+        private final double lng;
 
-        public Coordinate(double lat, double log) {
+        public Coordinate(double lat, double lng) {
             this.lat = lat;
-            this.log = log;
+            this.lng = lng;
         }
 
         public double getLat() {
             return lat;
         }
 
-        public double getLog() {
-            return log;
+        public double getLng() {
+            return lng;
         }
     }
 }
