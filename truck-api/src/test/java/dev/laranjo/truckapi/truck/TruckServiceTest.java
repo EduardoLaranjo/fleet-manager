@@ -89,7 +89,7 @@ class TruckServiceTest {
         final var pathGotten = got.getPath();
 
         Assertions.assertEquals(1.000, pathGotten.get(0).getLat());
-        Assertions.assertEquals(1.000, pathGotten.get(0).getLog());
+        Assertions.assertEquals(1.000, pathGotten.get(0).getLng());
 
         verify(truckRepository, times(1)).findByLicensePlate("98-MR-21");
 
