@@ -1,13 +1,12 @@
 import React from "react";
 import {FleetMap} from "./fleet/FleetMap";
 import "./App.css";
-import {TopBar} from "./fleet/TopBar";
+import 'semantic-ui-css/semantic.min.css'
 
 
 export function App() {
   return (
     <div>
-      <TopBar/>
       <FleetMap/>
     </div>
   );
