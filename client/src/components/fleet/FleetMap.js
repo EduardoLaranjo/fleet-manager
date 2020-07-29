@@ -1,49 +1,65 @@
 import React, {useState} from "react";
 import {GoogleMap} from "./GoogleMap";
-import {GasStation, Hotel, Restaurant, Truck} from "./Markers";
+import {PointOfInterest, TruckPath} from "./Markers";
+import TruckApi from "../../apis/truck";
+
+import {SearchBar} from "./SearchBar";
 import {Distance} from "./Distance";
 
 export function FleetMap() {
-  const [to, setTo] = useState(null)
-  const [truck, setTruck] = useState({pos: {lat: 38.7752344, lng: -9.3278361}})
-  const [hotels, setHotels] = useState([{lat: 38.733858, lng: -9.1501}, {lat: 38.903858, lng: -9.1501}])
-  const [gasStations, setGasStation] = useState([])
-  const [restaurants, setRestaurants] = useState([])
 
-  const handleOnClickMarker = (pos) => {
-    setTo(pos)
-  }
+  const [destination, setDestination] = useState(null)
 
-  function renderHotels() {
-    return hotels.map(pos => <Hotel pos={pos} handleOnClick={handleOnClickMarker}/>);
-  }
+  const [truck, setTruck] = useState({})
+  const [searchPOI, setSearchPOI] = useState({radius: 0, poi: []})
 
-  function renderRestaurants() {
-    return restaurants.map(pos => <Restaurant pos={pos} handleOnClick={handleOnClickMarker}/>);
-  }
+  const handleOnSearch = async ({license, poi, radius}) => {
+    const {data: truck} = await TruckApi.get(license)
+    const currLocation = truck.path[truck.path.length - 1]
 
-  function renderGasStations() {
-    return gasStations.map(pos => <GasStation pos={pos} handleOnClick={handleOnClickMarker}/>);
-  }
+    setTruck({currLocation: {...currLocation}, path: truck.path})
+    setSearchPOI( {radius: radius, poi: [...poi]})
+    setDestination(null)
+  };
 
-  let distance = <></>;
+  const renderTruckPath = () => {
+    if (truck.path) {
+      return <TruckPath path={truck.path}/>
+    }
+  };
 
-  if (to) {
-    distance = <Distance from={truck.pos} to={to}/>
-  }
+  const handleOnMarkerClick = (pos) => {
+    setDestination(pos)
+  };
 
-  return <div>
+  const renderPointsOfInterest = () => {
+    if (searchPOI.poi.length > 0 && searchPOI.radius > 0) {
+      return <PointOfInterest currLocation={truck.currLocation}
+                              types={searchPOI.poi}
+                              radius={searchPOI.radius}
+                              onPointClick={handleOnMarkerClick}/>
+    }
+  };
+
+  const renderDistance = () => {
+    if (truck && destination) {
+      return <Distance from={truck.currLocation} to={destination} />
+    }
+  };
 
 
-    <GoogleMap>
-      <Truck pos={truck.pos}/>
-      {distance}
+  return (
+    <div>
+      <SearchBar onSearchSubmit={handleOnSearch}/>
 
-      {renderHotels()}
-      {renderGasStations()}
-      {renderRestaurants()}
+      <GoogleMap>
+        {renderTruckPath()}
+        {renderDistance()}
+        {renderPointsOfInterest()}
+      </GoogleMap>
 
-    </GoogleMap>
-
-  </div>
+    </div>
+  )
 }
+
+

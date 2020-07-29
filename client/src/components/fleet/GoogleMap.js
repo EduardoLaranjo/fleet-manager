@@ -2,36 +2,44 @@ import React, {useEffect, useRef, useState} from "react";
 
 const LISBON = {lat: 38.733858, lng: -9.1501}
 
-export function GoogleMap({center, children}) {
+const mapStyles = [
+  {
+    featureType: "poi",
+    stylers: [{visibility: "off"}]
+  },
+  {
+    featureType: "transit",
+    stylers: [{visibility: "off"}]
+  }
+]
 
-  center = center || LISBON;
+export function GoogleMap({center = LISBON, children}) {
+  const {maps} = window.google
 
   const mapRef = useRef(null);
-
-  const [maps] = useState(window.google.maps)
   const [map, setMap] = useState(null)
 
   useEffect(() => {
-    const newMap = new maps.Map(mapRef.current, {
-        zoom: 14,
+    const map = new maps.Map(mapRef.current, {
+        zoom: 11,
         center: center,
         streetViewControl: false,
-        mapTypeControl: false
+        mapTypeControl: false,
+        styles: mapStyles
       }
     );
-
-    setMap(newMap);
-
-  }, [maps.Map])
-
+    setMap(map);
+  }, [])
 
   function renderChildren() {
     return React.Children.map(children, child => {
-      return React.cloneElement(child, {
-        ...child.props,
-        map: map,
-        maps: maps
-      })
+      if (child) {
+        return React.cloneElement(child, {
+          ...child.props,
+          map: map,
+          maps: maps
+        })
+      }
     })
   }
 
