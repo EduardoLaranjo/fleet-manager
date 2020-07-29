@@ -41,7 +41,7 @@ class TruckIntegrationTest {
     @DisplayName("get ONE truck by LICENSE")
     void when_get_truck_by_license_it_should_get_it() throws JSONException {
         final var restTemplate = new RestTemplate();
-        final var got = restTemplate.getForObject("http://localhost:{0}/truck/11-AA-11", String.class, randomServerPort);
+        final var got = restTemplate.getForObject("http://localhost:{0}/api/truck/AA-11-AA", String.class, randomServerPort);
         final var want = "{" +
                 "   \"licensePlate\": \"11-AA-11\"," +
                 "   \"year\": 2020," +
@@ -56,7 +56,7 @@ class TruckIntegrationTest {
     @DisplayName("get ALL trucks")
     void when_get_trucks_by_id_it_should_get_it() throws JSONException {
         final var restTemplate = new RestTemplate();
-        final var got = restTemplate.getForObject("http://localhost:{0}/truck", String.class, randomServerPort);
+        final var got = restTemplate.getForObject("http://localhost:{0}/api/truck/", String.class, randomServerPort);
         final var want = "[{" +
                 "   \"licensePlate\": \"11-AA-11\"," +
                 "   \"year\": 2020," +
@@ -83,7 +83,7 @@ class TruckIntegrationTest {
                 "}";
 
         try {
-            restTemplate.getForEntity("http://localhost:{0}/truck/AA-AA-AA", String.class, randomServerPort);
+            restTemplate.getForEntity("http://localhost:{0}/api/truck/AA-AA-AA", String.class, randomServerPort);
         } catch (HttpClientErrorException e) {
             JSONAssert.assertEquals(want, e.getResponseBodyAsString(), JSONCompareMode.LENIENT);
         }
