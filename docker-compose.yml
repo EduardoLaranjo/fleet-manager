@@ -1,11 +1,11 @@
 version: '3.0'
 services:
   web:
-    image: fleet-manager:latest
+    build: ./client/
     ports:
       - "80:80"
-    links:
+    depends_on:
       - truck-api
   truck-api:
-    container_name: truck-api
+    build: ./truck-api/
     image: truck-api:latest
