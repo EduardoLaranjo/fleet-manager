@@ -24,6 +24,12 @@ export function GoogleMap({center = LISBON, children}) {
   const [map, setMap] = useState(null)
 
   useEffect(() => {
+    if (map) {
+      map.setCenter(center)
+    }
+  }, [center])
+
+  useEffect(() => {
     const map = new maps.Map(mapRef.current, {
         zoom: 11,
         center: center,

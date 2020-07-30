@@ -74,7 +74,7 @@ export function FleetMap() {
     <div>
       <SearchBar onSearchSubmit={handleOnSearch}/>
 
-      <GoogleMap>
+      <GoogleMap center={truck.currLocation}>
         {renderTruckPath()}
         {renderDistance()}
         {renderPointsOfInterest()}
