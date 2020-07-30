@@ -21,9 +21,9 @@ class TruckIntegrationTest {
     @DisplayName("get ONE truck by LICENSE")
     void when_get_truck_by_license_it_should_get_it() throws JSONException {
         final var restTemplate = new RestTemplate();
-        final var got = restTemplate.getForObject("http://localhost:{0}/api/truck/AA-11-AA", String.class, randomServerPort);
+        final var got = restTemplate.getForObject("http://localhost:{0}/api/truck/11-AA-11", String.class, randomServerPort);
         final var want = "{" +
-                "   \"licensePlate\": \"AA-11-AA\"," +
+                "   \"licensePlate\": \"11-AA-11\"," +
                 "   \"year\": 2020," +
                 "   \"month\": 7" +
                 "}";
@@ -37,14 +37,17 @@ class TruckIntegrationTest {
         final var restTemplate = new RestTemplate();
         final var got = restTemplate.getForObject("http://localhost:{0}/api/truck/", String.class, randomServerPort);
         final var want = "[{" +
-                "   \"licensePlate\": \"AA-11-AA\"," +
+                "   \"licensePlate\": \"11-AA-11\"," +
                 "   \"year\": 2020," +
                 "   \"month\": 7" +
                 "}, {" +
                 "   \"licensePlate\": \"11-BB-11\"," +
                 "   \"year\": 2020," +
-                "   \"month\": 7," +
-                "   \"path\": []" +
+                "   \"month\": 7" +
+                "}, {" +
+                "   \"licensePlate\": \"11-CC-11\"," +
+                "   \"year\": 2020," +
+                "   \"month\": 7" +
                 "}]";
 
         JSONAssert.assertEquals(want, got, JSONCompareMode.LENIENT);
