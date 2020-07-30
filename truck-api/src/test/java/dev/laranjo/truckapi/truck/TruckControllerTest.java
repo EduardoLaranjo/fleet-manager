@@ -44,7 +44,7 @@ class TruckControllerTest {
         when(truckService.getAllTrucks()).thenReturn(List.of(truck1, truck2));
 
         //when
-        mvc.perform(MockMvcRequestBuilders.get("/"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/truck/"))
                 //then
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -71,7 +71,7 @@ class TruckControllerTest {
         when(truckService.getTruck(eq("AA-AA-AA"))).thenReturn(truck);
 
         //when
-        mvc.perform(MockMvcRequestBuilders.get("/AA-AA-AA"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/truck/AA-AA-AA"))
                 //then
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -91,7 +91,7 @@ class TruckControllerTest {
                 .thenThrow(new NotFoundException("The requested AA-AA-AA resource does not exist"));
 
         //when
-        mvc.perform(MockMvcRequestBuilders.get("/AA-AA-AA"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/truck/AA-AA-AA"))
                 //then
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
