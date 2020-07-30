@@ -1,4 +1,3 @@
-import React from "react";
 import {useEffect} from "react";
 import "./Distance.css"
 
@@ -9,7 +8,7 @@ export function Distance({from, to, map, maps}) {
   useEffect(() => {
     const marker = new maps.Polyline({
       path: [{...from}, {...to}],
-      icons: [{icon: arrow, offset: "99.9%"}],
+      icons: [{icon: arrow, offset: "96%"}],
       strokeColor: '#288E98',
       strokeOpacity: 1.0,
       map: map,
@@ -18,7 +17,7 @@ export function Distance({from, to, map, maps}) {
     const distanceBetween = maps.geometry.spherical.computeDistanceBetween(new maps.LatLng(from.lat, from.lng), new maps.LatLng(to.lat, to.lng));
 
     const info = new maps.InfoWindow({
-      content: `<div><span>${Math.trunc(distanceBetween)} m</span></div>`,
+      content: `<div class="distance-container"><span> Distance: ${Math.trunc(distanceBetween)}m</span></div>`,
       position: from
     });
 
