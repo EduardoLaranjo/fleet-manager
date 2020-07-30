@@ -1,9 +1,11 @@
 package dev.laranjo.truckapi.truck;
 
+import dev.laranjo.truckapi.infrastructure.LoggerConfig;
 import dev.laranjo.truckapi.shared.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
+@Import(value = {LoggerConfig.class})
 @DisplayName("Truck Service Test")
 class TruckServiceTest {
 
@@ -26,7 +29,7 @@ class TruckServiceTest {
                 .year(2020)
                 .manufacturer("MAN")
                 .licensePlate("98-MR-21")
-                .path(List.of(GeoRecord.at(1.00, 1.00)))
+                .path(List.of(GeoRecord.nowAt(1L, 1.00, 1.00)))
                 .build();
 
         final var want1 = new Truck.Builder()
@@ -36,7 +39,7 @@ class TruckServiceTest {
                 .year(2020)
                 .manufacturer("MAN")
                 .licensePlate("98-MR-22")
-                .path(List.of(GeoRecord.at(1.00, 1.00)))
+                .path(List.of(GeoRecord.nowAt(1L, 1.00, 1.00)))
                 .build();
 
         when(truckRepository.findAll()).thenReturn(List.of(want0, want1));
@@ -72,7 +75,7 @@ class TruckServiceTest {
                 .year(2020)
                 .manufacturer("MAN")
                 .licensePlate("98-MR-21")
-                .path(List.of(GeoRecord.at(1.00, 1.00)))
+                .path(List.of(GeoRecord.nowAt(1L, 1.00, 1.00)))
                 .build();
 
         when(truckRepository.findByLicensePlate("98-MR-21")).thenReturn(Optional.of(want));

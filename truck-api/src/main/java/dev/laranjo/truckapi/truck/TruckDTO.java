@@ -33,10 +33,12 @@ class TruckDTO {
     }
 
     public static class Coordinate {
+        private final long id;
         private final double lat;
         private final double lng;
 
-        public Coordinate(double lat, double lng) {
+        public Coordinate(long id, double lat, double lng) {
+            this.id = id;
             this.lat = lat;
             this.lng = lng;
         }
@@ -47,6 +49,10 @@ class TruckDTO {
 
         public double getLng() {
             return lng;
+        }
+
+        public long getId() {
+            return id;
         }
     }
 }

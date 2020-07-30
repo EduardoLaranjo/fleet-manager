@@ -32,7 +32,7 @@ class TruckService {
     private TruckDTO mapToTruckDTO(Truck truck) {
         final var mappedPath = truck.getPath()
                 .stream()
-                .map(geoRecord -> new TruckDTO.Coordinate(geoRecord.getLat(), geoRecord.getLng()))
+                .map(geoRecord -> new TruckDTO.Coordinate(geoRecord.getId(), geoRecord.getLat(), geoRecord.getLng()))
                 .collect(Collectors.toList());
 
         return new TruckDTO(truck.getLicensePlate(), truck.getMonth(), truck.getYear(), mappedPath);

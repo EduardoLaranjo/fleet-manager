@@ -5,6 +5,7 @@ import dev.laranjo.truckapi.shared.BaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 final class GeoRecord extends BaseEntity {
@@ -18,13 +19,14 @@ final class GeoRecord extends BaseEntity {
     public GeoRecord() {
     }
 
-    public GeoRecord(double lat, double lng) {
+    private GeoRecord(Long id, LocalDateTime creationTime, double lat, double lng) {
+        super(id, LocalDateTime.now());
         this.lat = lat;
         this.lng = lng;
     }
 
-    public static GeoRecord at(double lat, double log) {
-        return new GeoRecord(lat, log);
+    public static GeoRecord nowAt(Long id, double lat, double lng) {
+        return new GeoRecord(id, LocalDateTime.now(), lat, lng);
     }
 
     public double getLat() {
