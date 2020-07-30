@@ -14,7 +14,6 @@ ENV REACT_APP_GOOGLE_API_KEY AIzaSyCDgaxepLvkAFYBZBUu1m0JtFAffGXT5XY
 
 RUN npm run build
 
-
 FROM nginx:stable-alpine
 
 COPY --from=build /build/build/ /usr/share/nginx/html
