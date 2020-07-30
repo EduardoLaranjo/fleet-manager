@@ -44,10 +44,6 @@ class TruckIntegrationTest {
                 "   \"licensePlate\": \"11-BB-11\"," +
                 "   \"year\": 2020," +
                 "   \"month\": 7" +
-                "}, {" +
-                "   \"licensePlate\": \"11-CC-11\"," +
-                "   \"year\": 2020," +
-                "   \"month\": 7" +
                 "}]";
 
         JSONAssert.assertEquals(want, got, JSONCompareMode.LENIENT);
