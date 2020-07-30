@@ -10,6 +10,10 @@ const mapStyles = [
   {
     featureType: "transit",
     stylers: [{visibility: "off"}]
+  },
+  {
+    featureType: "administrative",
+    stylers: [{visibility: "off"}]
   }
 ]
 
@@ -25,7 +29,8 @@ export function GoogleMap({center = LISBON, children}) {
         center: center,
         streetViewControl: false,
         mapTypeControl: false,
-        styles: mapStyles
+        styles: mapStyles,
+        zoomControl: false
       }
     );
     setMap(map);
@@ -35,6 +40,7 @@ export function GoogleMap({center = LISBON, children}) {
     return React.Children.map(children, child => {
       if (child) {
         return React.cloneElement(child, {
+          ...child.key,
           ...child.props,
           map: map,
           maps: maps
